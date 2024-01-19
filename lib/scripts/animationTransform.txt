@@ -1,0 +1,103 @@
+import 'dart:math' as math;
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  bool _isFront = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+
+    _animation = Tween<double>(begin: 0, end: 1).animate(_controller);
+  }
+
+  void _toggleCard() {
+    setState(() {
+      _isFront = !_isFront;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Flutter Rotation Animation Example'),
+        ),
+        body: Center(
+          child: GestureDetector(
+            onTap: () {
+              _controller.reset();
+              _controller.forward();
+              _toggleCard();
+            },
+            child: AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                return Transform(
+                  transform: Matrix4.rotationY(_animation.value * math.pi),
+                  alignment: Alignment.center,
+                  child: _isFront ? _buildFront() : _buildBack(),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFront() {
+    // Replace this with your widget for the front side
+    return Container(
+      width: 200,
+      height: 200,
+      color: Colors.blue,
+      child: Center(
+        child: Text('Front'),
+      ),
+    );
+  }
+
+  Widget _buildBack() {
+    // Replace this with your widget for the back side
+    return Container(
+      width: 200,
+      height: 200,
+      color: Colors.red,
+      child: Center(
+        child: Text('Back'),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+// Matrix4.rotationY transformation
+//integrate with 'AnimationController' and 'setState'
+
+/*
+_controller is used to control the animation.
+_animation is an instance of Animation<double> that represents the progression of the animation.
+The Matrix4.rotationY transformation is applied to the Transform widget using _animation.value to control the rotation angle.
+The GestureDetector is used to detect taps, triggering the animation and toggling the card.
+*/

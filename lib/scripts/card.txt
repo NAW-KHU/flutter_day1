@@ -1,0 +1,90 @@
+// FLutter Card Widget
+import 'package:flutter/material.dart';
+// imported google's material design library
+
+void main() {
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: const Text('GeeksforGeeks'),
+        backgroundColor: Colors.greenAccent[400],
+        centerTitle: true,
+      ),
+      body: const Center(
+        // Card Widget
+        child: Card(
+          elevation: 50,
+          shadowColor: Colors.black,
+          color: Colors.greenAccent,
+          child: SizedBox(
+            width: 300,
+            height: 500,
+            child: Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Color.fromARGB(255, 76, 175, 80),
+                    radius: 109,
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://media.geeksforgeeks.org/wp-content/uploads/20210101144014/gfglogo.png"), //NetworkImage
+                      radius: 98,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'GeeksforGeeks',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.green,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Text(
+                    'GeeksforGeeks is a computer science portal for geeks at geeksforgeeks.org. It contains well written, well thought and well explained computer science and programming articles, quizzes, projects, interview experiences and much more!!',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.green,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: 120.0,
+                    height: 50.0,
+                    child: ElevatedButton(
+                        onPressed: null,
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.green)),
+                        child: Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.touch_app, color: Colors.white70,),
+                              Text(
+                                'Visit',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white70,fontSize: 15),
+                              )
+                            ],
+                          ),
+                        )),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ));
+}

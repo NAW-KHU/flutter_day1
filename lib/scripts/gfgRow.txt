@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+
+// function to trigger build
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'GeeksforGeeks',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("GeeksForGeeks"),
+      backgroundColor: Colors.green,
+      leading: const Icon (Icons.menu),
+      ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),color: Colors.green
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                "Geeks",
+                style: TextStyle(color: Colors.yellow,fontSize: 25),
+                ),
+              ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: Colors.green
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                "For",
+                style: TextStyle(color: Colors.yellow, fontSize: 25),
+              ),
+              ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0), color: Colors.green
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                "Geeks",
+                style: TextStyle(color: Colors.yellow, fontSize: 25),
+              ),
+              )
+            
+          )
+        ],
+      ),
+    );
+  }
+}
+
+  
+

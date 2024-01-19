@@ -1,0 +1,86 @@
+// Practice of singletickerprovidermixin
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: const Text('Rotation Animation Example'),
+      ),
+      body: const RotationAnimationWidget(),
+    ),
+  ));
+}
+
+class RotationAnimationWidget extends StatefulWidget {
+  const RotationAnimationWidget({super.key});
+
+  @override
+  State<RotationAnimationWidget> createState() =>
+      _RotationAnimationWidgetState();
+}
+
+class _RotationAnimationWidgetState extends State<RotationAnimationWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  bool isPaused = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+    _controller.repeat();
+  }
+
+  // void togglePause() {
+  //   if (_controller.isAnimating) {
+  //     _controller.stop();
+  //   } else {
+  //     _controller.repeat();
+  //   }
+
+  //   setState(() {
+  //     isPaused = !isPaused;
+  //   });
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RotationTransition(
+            turns: _controller,
+            child: Container(
+              width: 100,
+              height: 100,
+              color: Colors.blue,
+            ),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            // onPressed: togglePause,
+            onPressed: () {
+              _controller.repeat(period: const Duration(seconds: 1), reverse: !isPaused);
+              setState(() {
+                isPaused = !isPaused;
+              });
+            },
+            child: Text(isPaused ? 'Resume Animation' : 'Pause Animation'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}

@@ -1,0 +1,55 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import '../model/api2modal.dart';
+import 'package:my_project/utils/api2cardscreen.dart';
+
+
+
+
+class ProductListScreen extends StatefulWidget {
+  const ProductListScreen({super.key});
+
+  @override
+  State<ProductListScreen> createState() => _ProductListScreenState();
+}
+
+class _ProductListScreenState extends State<ProductListScreen> {
+  List<Product> products = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchProducts();
+  }
+
+  Future<void> fetchProducts() async {
+    //replace your api link with this link
+    final response =
+        await http.get(Uri.parse('https://fakestoreapi.com/products'));
+    if (response.statusCode == 200) {
+      List<dynamic> jsonData = json.decode(response.body);
+      setState(() {
+        products = jsonData.map((data) => Product.fromJson(data)).toList();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Product List'),
+      ),
+      body: ListView.builder(
+        // this give the length of item
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          // here we set card the card widget
+          // which is in utils folder
+          return ProductCard(product: products[index]);
+        },
+      ),
+    );
+  }
+}

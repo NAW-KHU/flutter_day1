@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+
+// Flutter-Making card clickable
+void main() {
+  runApp(MaterialApp(
+    home: const MyApp(),
+    theme: ThemeData(primarySwatch: Colors.green),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Clickable card'),
+        leading: const Icon(Icons.menu),
+        backgroundColor: Colors.green,
+      ),
+      backgroundColor: Colors.white,
+      body:Center(
+        child: GestureDetector(
+          onTap: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Gesture Detected!')));
+          },
+        child: const SizedBox(
+
+          height: 100,
+          child: Card(
+          color:Color.fromRGBO(231, 231, 210, 1),
+            elevation: 10,
+            child: Text('Geeks for Geeks, Hello this is clickable card, tap me',
+            style: TextStyle(color: Colors.black),),
+          ),
+        ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+
+// function to start app building
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          leading: const Icon(Icons.menu),
+          backgroundColor: Colors.green,
+          title: const Text(
+            "Insert Image Demo",
+            textAlign: TextAlign.start,
+          ),
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Image.asset(
+                'assets/images/Output.gif',
+                height: 200,
+                scale: 2.5,
+                opacity: const AlwaysStoppedAnimation<double>(0.5),
+              ),
+              Image.asset(
+                'assets/images/GeeksforGeeks.jpeg',
+                height: 400,
+                width: 400,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
